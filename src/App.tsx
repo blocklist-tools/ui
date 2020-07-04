@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {DnsQuery} from "./components/dnsQuery";
+import {useDnsQuery} from "./hooks/useDnsQuery";
 
 function App() {
+  const [domainName, updateDomainName] = useState("");
+  const [queryType, updateQueryType] = useState("A");
+  const query = useDnsQuery(domainName, queryType);
+
+  function updateDnsQuery(name: string, type: string) {
+    updateDomainName(name);
+    updateQueryType(type);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DnsQuery domainName={domainName} queryType={queryType}
+                onChange={(name: string, type: string) => updateDnsQuery(name, type)} />
     </div>
   );
 }
