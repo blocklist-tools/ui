@@ -1,37 +1,43 @@
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, useState} from "react";
 
 interface IDnsQuery {
-    domainName: string;
-    queryType: string
-    onChange: (arg0: string, arg1: string)=>void;
+    onSubmit: (arg0: string, arg1: string)=>void;
 }
 
 export const DnsQuery: FunctionComponent<IDnsQuery> = (props: IDnsQuery) =>  {
+    const [domainName, setDomainName] = useState('');
+    const [queryType, setQueryType] = useState('A');
+
     function handleChangedDomainName(event: { target: HTMLInputElement; }) {
-        props.onChange(event.target.value, props.queryType);
+        setDomainName(event.target.value);
     }
 
     function handleChangedQueryType(event: { target: HTMLSelectElement; }) {
-        props.onChange(props.domainName, event.target.value)
+        setQueryType(event.target.value);
+    }
+
+    function handleSubmit(event: React.FormEvent) {
+        event.preventDefault();
+        props.onSubmit(domainName, queryType);
     }
 
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <label>
                 DNS Query
                 <input
                     type="text"
                     spellCheck="false"
                     name="heartbeatTimeout"
-                    value={props.domainName}
+                    value={domainName}
                     onChange={handleChangedDomainName}
                 />
             </label>
             <label>
                 Query Type
-                <select value={props.queryType} onChange={handleChangedQueryType}>
+                <select value={queryType} onChange={handleChangedQueryType}>
                     <option>A</option>
-                    <option>AAA</option>
+                    <option>AAAA</option>
                     <option>CAA</option>
                     <option>CNAME</option>
                     <option>MX</option>
@@ -42,6 +48,6 @@ export const DnsQuery: FunctionComponent<IDnsQuery> = (props: IDnsQuery) =>  {
                     <option>TXT</option>
                 </select>
             </label>
-        </div>
+        </form>
     );
 };

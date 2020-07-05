@@ -4,8 +4,8 @@ import {DnsQuery} from "./components/dnsQuery";
 import {useDnsQuery} from "./hooks/useDnsQuery";
 
 function App() {
-  const [domainName, updateDomainName] = useState("");
-  const [queryType, updateQueryType] = useState("A");
+  const [domainName, updateDomainName] = useState('');
+  const [queryType, updateQueryType] = useState('A');
   const query = useDnsQuery(domainName, queryType);
 
   function updateDnsQuery(name: string, type: string) {
@@ -15,8 +15,10 @@ function App() {
 
   return (
     <div className="App">
-      <DnsQuery domainName={domainName} queryType={queryType}
-                onChange={(name: string, type: string) => updateDnsQuery(name, type)} />
+      <DnsQuery onSubmit={(name: string, type: string) => updateDnsQuery(name, type)} />
+      <pre>
+        {query?.response}
+      </pre>
     </div>
   );
 }
