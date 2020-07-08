@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import ApiError from "../exceptions/ApiError";
 import ApiClient, {DnsQuery} from "../services/ApiClient";
 
-export function useDnsQuery(domainName: string, queryType: string): DnsQuery|null {
+export function UseDnsQuery(domainName: string, queryType: string): DnsQuery|null {
     const [dnsQuery, setDnsQuery] = useState<DnsQuery|null>(null);
 
     function getExamDelivery(domainName: string, queryType: string) {

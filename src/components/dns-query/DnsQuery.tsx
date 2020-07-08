@@ -29,6 +29,7 @@ export const DnsQuery: FunctionComponent<IDnsQuery> = (props: IDnsQuery) =>  {
                     type="text"
                     spellCheck="false"
                     name="heartbeatTimeout"
+                    placeholder="example.com"
                     value={domainName}
                     onChange={handleChangedDomainName}
                 />
@@ -48,6 +49,7 @@ export const DnsQuery: FunctionComponent<IDnsQuery> = (props: IDnsQuery) =>  {
                     <option>TXT</option>
                 </select>
             </label>
+            <button type={"submit"}>Query</button>
         </form>
     );
 };

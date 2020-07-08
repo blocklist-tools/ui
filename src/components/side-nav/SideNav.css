@@ -1,0 +1,34 @@
+.component-side-nav {
+    display: block;
+    float: left;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-width: 300px;
+    background: #19323e;
+}
+
+.component-side-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.component-side-nav li {
+    padding: 10px 10px 10px 10px;
+}
+
+.component-side-nav li + li {
+    box-shadow: 0 1px 3px 0 #000;
+    border-top: #212121 solid 1px;
+}
+
+.component-side-nav .avatar {
+    text-align: center;
+}
+
+.component-side-nav .avatar img {
+    height: 4rem;
+    vertical-align: bottom;
+    display: inline-block;
+}
