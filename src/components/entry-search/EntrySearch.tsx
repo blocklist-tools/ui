@@ -9,7 +9,7 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
     const [query, setQuery] = useState('');
 
     function handleChangedQuery(event: { target: HTMLInputElement; }) {
-        setQuery(event.target.value);
+        setQuery(event.target.value.trim().toLowerCase());
     }
 
     function handleSubmit(event: React.FormEvent) {
