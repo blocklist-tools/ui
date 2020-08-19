@@ -1,0 +1,23 @@
+
+version: '3.4'
+
+services:
+  npm:
+    image: node:14-buster
+    volumes:
+      - "${PWD}/:/opt/ui"
+    working_dir: /opt/ui
+    entrypoint: "npm"
+    ports:
+    - 3000:3000
+
+  dev:
+    image: node:14-buster
+    volumes:
+      - "${PWD}/:/opt/ui"
+    working_dir: /opt/ui
+    entrypoint: "npm"
+    command: ["run", "start"]
+    ports:
+    - 3000:3000
+

@@ -1,0 +1,9 @@
+.component-display-dns-query {
+
+}
+
+.component-display-dns-query select {
+    margin-left: 30px;
+    font-size: 1rem;
+    height: 30px;
+}

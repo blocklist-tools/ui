@@ -1,0 +1,27 @@
+.component-display-entry-search-response {
+
+}
+
+.component-display-entry-search-response ul {
+    margin-top: 3px;
+}
+
+.component-display-entry-search-response li {
+    margin-bottom: 3px;
+}
+
+.component-display-entry-search-response .blocklist-name {
+    font-weight: bold;
+}
+
+.component-display-entry-search-response .included-icon {
+    padding-right: 10px;
+}
+
+.component-display-entry-search-response .is-included {
+    color: #006400;
+}
+
+.component-display-entry-search-response .is-removed {
+    color: #8b0000;
+}
