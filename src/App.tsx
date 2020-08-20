@@ -6,23 +6,15 @@ import {SideNav} from "./components/side-nav/SideNav";
 import {Header} from "./components/header/Header";
 import {Footer} from "./components/footer/Footer";
 import {DisplayDnsQuery} from "./components/dns-response/DisplayDnsQuery";
-import {EntrySearch} from "./components/entry-search/EntrySearch";
-import {UseEntrySearch} from "./hooks/UseEntrySearch";
-import {DisplayEntrySearchResponse} from "./components/entry-search-response/DisplayEntrySearchResponse";
 
 function App() {
-  //const [domainName, updateDomainName] = useState('');
+  const [domainName, updateDomainName] = useState('');
   const [queryType, updateQueryType] = useState('A');
-  const [entrySearchQuery, updateEntrySearchQuery] = useState('');
-  const query = UseDnsQuery(entrySearchQuery, queryType);
-  const entrySearchResponse = UseEntrySearch(entrySearchQuery);
+  const query = UseDnsQuery(domainName, queryType);
 
-  function updateDnsQueryType(type: string) {
+  function updateDnsQuery(name: string, type: string) {
+    updateDomainName(name);
     updateQueryType(type);
-  }
-
-  function updateEntrySearch(query: string) {
-    updateEntrySearchQuery(query);
   }
 
   return (
@@ -30,9 +22,8 @@ function App() {
       <SideNav isOpen={true} />
       <Header />
       <main>
-          <EntrySearch onSubmit={(searchQuery: string) => updateEntrySearch(searchQuery)} />
-          <DisplayEntrySearchResponse entrySearchResponse={entrySearchResponse} />
-          <DisplayDnsQuery dnsQuery={query} onQueryTypeChange={(newQueryType: string) => updateDnsQueryType(newQueryType)} />
+          <DnsQuery onSubmit={(name: string, type: string) => updateDnsQuery(name, type)} />
+          <DisplayDnsQuery dnsQuery={query} />
       </main>
       <Footer />
     </React.Fragment>

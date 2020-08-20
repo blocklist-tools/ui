@@ -52,10 +52,3 @@ a {
 a:hover {
   color: #9CD7F7;
 }
-
-section {
-  background-color: #061f2f;
-  box-shadow: 0 1px 3px 0 #000;
-  margin: 0 0 10px 0;
-  padding: 1px 5px 10px 5px;
-}

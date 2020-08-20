@@ -24,8 +24,8 @@ export const SideNav: FunctionComponent<ISideNav> = (props: ISideNav) =>  {
                         <img src="../lightswitch05.png" alt="lightswitch05 avatar" />
                     </a>
                 </li>
-                <li>Entry Lookup</li>
-                <li>Blocklists</li>
+                <li>URL Lookup</li>
+                <li>Blocklist Lookup</li>
             </ul>
         </aside>
     );
