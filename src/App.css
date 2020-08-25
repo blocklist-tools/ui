@@ -4,3 +4,10 @@ main {
   max-width: 960px;
   padding: 0;
 }
+
+.avatar {
+  height: 1.5em;
+  vertical-align: bottom;
+  display: inline-block;
+  margin-right: 5px;
+}

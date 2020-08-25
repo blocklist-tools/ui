@@ -1,38 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import {DnsQuery} from "./components/dns-query/DnsQuery";
-import {UseDnsQuery} from "./hooks/UseDnsQuery";
-import {SideNav} from "./components/side-nav/SideNav";
 import {Header} from "./components/header/Header";
 import {Footer} from "./components/footer/Footer";
-import {DisplayDnsQuery} from "./components/dns-response/DisplayDnsQuery";
-import {EntrySearch} from "./components/entry-search/EntrySearch";
-import {DisplayEntrySearchResponse} from "./components/entry-search-response/DisplayEntrySearchResponse";
-import {UseEntrySearch} from "./hooks/UseEntrySearch";
+import {EntrySearchPage} from "./components/entry-search-page/EntrySearchPage";
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {BlocklistsPage} from "./components/blocklists-page/BlocklistsPage";
 
 function App() {
-  //const [domainName, updateDomainName] = useState('');
-  const [queryType, updateQueryType] = useState('A');
-  const [entrySearchQuery, updateEntrySearchQuery] = useState('');
-  const query = UseDnsQuery(entrySearchQuery, queryType);
-  const entrySearchResponse = UseEntrySearch(entrySearchQuery);
-
-  function updateDnsQueryType(type: string) {
-    updateQueryType(type);
-  }
-
-  function updateEntrySearch(query: string) {
-      updateEntrySearchQuery(query);
-  }
-
   return (
     <React.Fragment>
-      <SideNav isOpen={true} />
       <Header />
       <main>
-        <EntrySearch onSubmit={(searchQuery: string) => updateEntrySearch(searchQuery)} />
-        <DisplayEntrySearchResponse entrySearchResponse={entrySearchResponse} />
-        <DisplayDnsQuery dnsQuery={query} onQueryTypeChange={(newQueryType: string) => updateDnsQueryType(newQueryType)} />
+        <BrowserRouter>
+          <Switch>
+            <Route path='/blocklists' component={BlocklistsPage} />
+            <Route path='/entries/search' component={EntrySearchPage} />
+            <Route>
+              <Redirect to='/entries/search' />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </main>
       <Footer />
     </React.Fragment>

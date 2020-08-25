@@ -2,11 +2,12 @@ import React, {FunctionComponent, useState} from "react";
 import "./EntrySearch.css";
 
 interface IEntrySearch {
-    onSubmit: (arg0: string)=>void;
+  value: string|null
+  onSubmit: (arg0: string)=>void;
 }
 
 export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch) =>  {
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState(props.value || '');
 
     function handleChangedQuery(event: { target: HTMLInputElement; }) {
         setQuery(event.target.value.trim().toLowerCase());

@@ -65,7 +65,7 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
     return (
         <section className={'component-display-entry-search-response'}>
             <h2>
-                List Entries
+                Lists containing {props.entrySearchResponse.query}
             </h2>
             {content}
         </section>

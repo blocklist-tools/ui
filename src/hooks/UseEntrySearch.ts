@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import ApiError from "../exceptions/ApiError";
 import ApiClient, {EntrySearchResponse} from "../services/ApiClient";
 
-export function UseEntrySearch(query: string): EntrySearchResponse|null {
+export function UseEntrySearch(query: string|null): EntrySearchResponse|null {
     const [entrySearchResponse, setEntrySearchResponse] = useState<EntrySearchResponse|null>(null);
 
     function getExamDelivery(entry: string) {
