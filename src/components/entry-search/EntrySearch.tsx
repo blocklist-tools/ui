@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from "react";
+import React, {FunctionComponent, useEffect, useRef, useState} from "react";
 import "./EntrySearch.css";
 
 interface IEntrySearch {
@@ -12,6 +12,8 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
   useEffect(() => {
     setQuery(props.value);
   }, [props.value]);
+
+  const textInput = useRef<HTMLInputElement | null>(null);
 
   function handleChangedQuery(event: { target: HTMLInputElement; }) {
     setQuery(event.target.value.trim().toLowerCase());
@@ -28,13 +30,17 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
   }
 
   function handleClear() {
+    setQuery('');
     props.onSubmit('');
+    textInput?.current?.focus();
   }
 
   return (
     <form onSubmit={handleSubmit} className={"component-entry-search"}>
       <label hidden htmlFor="entry-search-input">URL Search</label>
       <input
+        autoFocus
+        ref={textInput}
         id="entry-search-input"
         title="Search for domain name or URL"
         type="text"
