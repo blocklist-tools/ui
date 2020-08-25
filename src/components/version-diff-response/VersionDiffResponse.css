@@ -1,0 +1,13 @@
+.component-version-diff-response .added-line {
+  background-color: darkgreen;
+}
+
+.component-version-diff-response .removed-line {
+  background-color: darkred;
+}
+
+.component-version-diff-response .line-break {
+  background-color: #212121;
+  color: #FFF;
+  text-align: center;
+}

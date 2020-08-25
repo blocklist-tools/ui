@@ -5,7 +5,7 @@ import ApiClient, {DnsQuery} from "../services/ApiClient";
 export function UseDnsQuery(domainName: string|null, queryType: string): DnsQuery|null {
   const [dnsQuery, setDnsQuery] = useState<DnsQuery|null>(null);
 
-  function getExamDelivery(domainName: string, queryType: string) {
+  function getDnsQuery(domainName: string, queryType: string) {
     ApiClient
       .dnsQuery(domainName, queryType)
       .then(applyDnsResponse);
@@ -29,7 +29,7 @@ export function UseDnsQuery(domainName: string|null, queryType: string): DnsQuer
     if (dnsQuery && dnsQuery.queryName?.toLowerCase() === domainName.toLowerCase() && dnsQuery.queryType === queryType) {
       return;
     }
-    getExamDelivery(domainName, queryType);
+    getDnsQuery(domainName, queryType);
   });
 
   return dnsQuery;

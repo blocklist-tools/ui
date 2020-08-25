@@ -23,6 +23,10 @@ export interface EntrySummary {
   listAddedOn: Date
 }
 
+export interface VersionDiff {
+  lines: string[]
+}
+
 export default class ApiClient {
   private static readonly rootApiUrl = process.env.REACT_APP_ROOT_API_URL;
 
@@ -97,5 +101,23 @@ export default class ApiClient {
       query: body.query as string,
       summaries: summaries
     }
+  }
+
+  public static async versionDiff(firstVersion: string, secondVersion: string|null): Promise<VersionDiff | ApiError> {
+    const response = await this.safeFetch(`${this.rootApiUrl}/versions/${firstVersion}/diff/${secondVersion || ''}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Version diff query failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      return ApiError.fromMessage(error);
+    }
+    const body = await response.text();
+    return {
+      lines: body.split(/\r?\n/)
+    };
   }
 }

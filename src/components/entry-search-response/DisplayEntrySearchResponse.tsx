@@ -43,7 +43,13 @@ function entryStatus(entry: EntrySummary) {
   return (
     <div>
       {includedIcon(entry)}
-      {dateSpan(entry.addedOn, initialVersion)} - {dateSpan(entry.removedOn, stillBlocked)}
+      <a href={`/versions/${entry.addedVersionId}/diff`}>
+        {dateSpan(entry.addedOn, initialVersion)}
+      </a>
+      -
+      <a href={`/versions/${entry.removedVersionId}/diff`}>
+        {dateSpan(entry.removedOn, stillBlocked)}
+      </a>
     </div>
   );
 }
