@@ -1,25 +1,29 @@
 .component-entry-search {
-    width: 100%;
-    height: 30px;
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 10px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
 }
 
 .component-entry-search button,
 .component-entry-search input {
-    height: 100%;
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .component-entry-search input {
-    /* Tell the input to use all the available space */
-    flex-grow:2;
-    /* And hide the input's outline, so the form looks like the outline */
-    border:none;
+  /* Tell the input to use all the available space */
+  flex-grow:2;
+  /* And hide the input's outline, so the form looks like the outline */
+  border:none;
 }
 .component-entry-search button {
-    border: none;
-    background-color: #d9d9d9;
-    color:black;
+  padding: 0 8px 0 8px;
+  border: none;
+  background-color: #d9d9d9;
+  color:black;
+}
+
+.component-entry-search button:hover, button:focus {
+  background-color: #9CD7F7;
 }

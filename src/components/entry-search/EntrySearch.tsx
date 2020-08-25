@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
 import "./EntrySearch.css";
-import {UseQueryParam} from "../../hooks/UseQueryParam";
 
 interface IEntrySearch {
   value: string
