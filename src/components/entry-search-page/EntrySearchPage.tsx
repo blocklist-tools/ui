@@ -4,23 +4,26 @@ import {DisplayEntrySearchResponse} from "../entry-search-response/DisplayEntryS
 import {DisplayDnsQuery} from "../dns-response/DisplayDnsQuery";
 import {UseDnsQuery} from "../../hooks/UseDnsQuery";
 import {UseEntrySearch} from "../../hooks/UseEntrySearch";
-import {useHistory, useLocation} from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import {UseQueryParam} from "../../hooks/UseQueryParam";
 
 export const EntrySearchPage: FunctionComponent = () =>  {
-  const queryParam = new URLSearchParams(useLocation().search);
-  const history = useHistory();
-
-  const query = queryParam.get('q');
+  const query = UseQueryParam('q', '');
   const [queryType, updateQueryType] = useState('A');
   const queryResponse = UseDnsQuery(query, queryType);
   const entrySearchResponse = UseEntrySearch(query);
+  const history = useHistory();
 
   function updateDnsQueryType(type: string) {
     updateQueryType(type);
   }
 
   function updateEntrySearch(query: string) {
-    history.push("/entries/search?q=" + encodeURIComponent(query));
+    let queryString = '';
+    if (query && query.length > 0) {
+      queryString = '?q=' + encodeURIComponent(query);
+    }
+    history.push("/entries/search" + queryString);
   }
 
   return (
