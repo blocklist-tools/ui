@@ -5,6 +5,21 @@ export interface DnsQuery {
     queryName: string
     queryType: string
     response: string
+    rcode: string
+}
+
+export interface EntrySearchResponse {
+    query: string
+    summaries: EntrySummary[]
+}
+
+export interface EntrySummary {
+    blocklistName: string
+    blocklistId: string
+    addedVersionId: string
+    addedOn: Date
+    removedVersionId: string
+    removedOn: Date
 }
 
 export default class ApiClient {
@@ -45,5 +60,36 @@ export default class ApiClient {
             return ApiError.fromMessage(error);
         }
         return await response.json();
+    }
+
+    public static async entrySearch(query: string): Promise<EntrySearchResponse|ApiError> {
+        let params = new URLSearchParams();
+        params.append('q', query);
+        const response = await this.safeFetch(`${this.rootApiUrl}/entries/search?${params}`, {
+            headers: this.defaultHeaders(),
+            mode: 'cors',
+            method: 'GET'
+        });
+        if (response.status !== 200) {
+            let error = `Entry search failed: ${response.status} => ${await response.text()}`;
+            console.log(error);
+            return ApiError.fromMessage(error);
+        }
+        const body = await response.json() as any;
+
+        const summaries = body.summaries.map(function(summary: any) {
+            return {
+                blocklistName: summary.blocklistName,
+                blocklistId: summary.blocklistId,
+                addedVersionId: summary.addedVersionId,
+                addedOn: new Date(summary.addedOn),
+                removedVersionId: summary.removedVersionId,
+                removedOn: new Date(summary.removedOn)
+            }
+        });
+        return {
+            query: body.query as string,
+            summaries: summaries
+        }
     }
 }

@@ -28,7 +28,7 @@ export const DnsQuery: FunctionComponent<IDnsQuery> = (props: IDnsQuery) =>  {
                 <input
                     type="text"
                     spellCheck="false"
-                    name="heartbeatTimeout"
+                    name="dnsQueryDomainName"
                     placeholder="example.com"
                     value={domainName}
                     onChange={handleChangedDomainName}

@@ -22,7 +22,7 @@ export function UseDnsQuery(domainName: string, queryType: string): DnsQuery|nul
         if (!domainName || !queryType) {
             return;
         }
-        if (dnsQuery && dnsQuery.queryName === domainName && dnsQuery.queryType === queryType) {
+        if (dnsQuery && dnsQuery.queryName?.toLowerCase() === domainName.toLowerCase() && dnsQuery.queryType === queryType) {
             return;
         }
         getExamDelivery(domainName, queryType);
