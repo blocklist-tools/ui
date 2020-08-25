@@ -18,12 +18,16 @@ export function UseEntrySearch(query: string|null): EntrySearchResponse|null {
         setEntrySearchResponse(response);
     }
 
+    function clearResponse() {
+      setEntrySearchResponse(null);
+    }
+
     useEffect(() => {
-        if (!query) {
-            return;
+        if (!query || query.length === 0) {
+            return clearResponse();
         }
         if (entrySearchResponse && entrySearchResponse.query?.toLowerCase() === query.toLowerCase()) {
-            return;
+          return;
         }
         getExamDelivery(query);
     });
