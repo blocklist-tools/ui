@@ -6,6 +6,7 @@ export function UseEntrySearch(query: string | null): EntrySearchResponse | null
   const [entrySearchResponse, setEntrySearchResponse] = useState<EntrySearchResponse | null>(null);
 
   function searchEntries(entry: string) {
+    clearResponse();
     ApiClient
       .entrySearch(entry)
       .then(applyEntrySearchResponse);

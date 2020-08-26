@@ -6,6 +6,7 @@ export function UseDnsQuery(domainName: string|null, queryType: string): DnsQuer
   const [dnsQuery, setDnsQuery] = useState<DnsQuery|null>(null);
 
   function getDnsQuery(domainName: string, queryType: string) {
+    clearDnsQuery();
     ApiClient
       .dnsQuery(domainName, queryType)
       .then(applyDnsResponse);
