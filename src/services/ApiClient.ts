@@ -24,6 +24,8 @@ export interface EntrySummary {
 }
 
 export interface VersionDiff {
+  firstVersion: string
+  secondVersion: string|null
   lines: string[]
 }
 
@@ -117,6 +119,8 @@ export default class ApiClient {
     }
     const body = await response.text();
     return {
+      firstVersion: firstVersion,
+      secondVersion: secondVersion,
       lines: body.split(/\r?\n/)
     };
   }

@@ -26,6 +26,9 @@ export function UseVersionDiff(firstVersion: string, secondVersion: string|null)
     if (!firstVersion || firstVersion.length === 0) {
       return clearResponse();
     }
+    if (versionDiff && versionDiff.firstVersion === firstVersion && versionDiff.secondVersion === secondVersion) {
+      return;
+    }
     getVersionDiff(firstVersion, secondVersion);
   });
 
