@@ -81,7 +81,7 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
   }
 
   return (
-    <section className={'component-display-entry-search-response'}>
+    <section className={'component-display-entry-search-response basic-section'}>
       <h2>
         Lists containing {props.entrySearchResponse.query}
       </h2>

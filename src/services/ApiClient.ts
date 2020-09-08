@@ -29,6 +29,17 @@ export interface VersionDiff {
   lines: string[]
 }
 
+export interface Blocklist {
+  id: string
+  name: string
+  format: string
+  downloadUrl: string
+  homepageUrl: string
+  issuesUrl: string
+  licenseUrl: string
+  licenseType: string
+}
+
 export default class ApiClient {
   private static readonly rootApiUrl = process.env.REACT_APP_ROOT_API_URL;
 
@@ -123,5 +134,20 @@ export default class ApiClient {
       secondVersion: secondVersion,
       lines: body.split(/\r?\n/)
     };
+  }
+
+  public static async fetchLists(page: number) {
+    const response = await this.safeFetch(`${this.rootApiUrl}/blocklists?page=${page}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Fetch lists failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      return ApiError.fromMessage(error);
+    }
+    return await response.json() as Blocklist[];
   }
 }

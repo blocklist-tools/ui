@@ -1,7 +1,11 @@
 import React, {FunctionComponent} from "react";
+import {UseBlocklists} from "../../hooks/UseBlocklists";
+import {BlocklistsTable} from "../blocklists-table/BlocklistsTable";
 
 export const BlocklistsPage: FunctionComponent = () =>  {
-    return (
-        <div>hello</div>
-    );
+  const blocklists = UseBlocklists();
+
+  return (
+      <BlocklistsTable blocklists={blocklists} />
+  );
 };

@@ -1,0 +1,28 @@
+.component-blocklist-table {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.component-blocklist-table .blocklist-card {
+  background-color: #061f2f;
+  box-shadow: 0 1px 3px 0 #000;
+  margin: 0 10px 10px 0;
+  width: 280px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.component-blocklist-table .blocklist-name {
+  font-weight: bold;
+  color: #00CED1;
+}
+
+.component-blocklist-table .blocklist-table-details-list {
+  list-style-type: none;
+}
+
+.component-blocklist-table .blocklist-table-details-list svg {
+  padding-right: 15px;
+}

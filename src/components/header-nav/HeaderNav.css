@@ -1,0 +1,35 @@
+.component-header-nav {
+  display: block;
+  background: #19323e;
+  width: 100%;
+  box-shadow: 0 1px 3px 0 #000;
+}
+
+.component-header-nav ul {
+  max-width: 960px;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.component-header-nav li {
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.component-header-nav li:hover,
+.component-header-nav li:active,
+.component-header-nav a:active {
+  background-color: #0a121b;
+  color: #fff;
+}
+
+.component-header-nav li + li {
+  border-left: none;
+}
+
+.component-header-nav a:visited {
+  color: inherit;
+}

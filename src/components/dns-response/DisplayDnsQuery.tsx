@@ -16,7 +16,7 @@ export const DisplayDnsQuery: FunctionComponent<IDisplayDnsQuery> = (props: IDis
   }
 
   return (
-    <section className={"component-display-dns-query"}>
+    <section className={"component-display-dns-query basic-section"}>
       <h2>
         DNS Query
 
