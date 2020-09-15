@@ -22,8 +22,8 @@ function dateSpan(date: Date|null, altText: string | null) {
   return (<span title={title}>{text}</span>)
 }
 
-function diffLink(versionId: string|null, dateSpan: JSX.Element) {
-  if (versionId) {
+function diffLink(isInitialVersion: boolean, versionId: string|null, dateSpan: JSX.Element) {
+  if (versionId && !isInitialVersion) {
     return (
       <a href={`/versions/${versionId}/diff`}>
         {dateSpan}
@@ -63,7 +63,7 @@ function entryStatus(entry: EntrySummary) {
   return (
     <div>
       {includedIcon(entry)}
-      {diffLink(entry.addedVersionId, addedDate)} - {diffLink(entry.removedVersionId, removedDate)}
+      {diffLink(!!initialVersion, entry.addedVersionId, addedDate)} - {diffLink(false, entry.removedVersionId, removedDate)}
     </div>
   );
 }
