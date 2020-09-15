@@ -26,7 +26,7 @@ export function UseBlocklists(): Blocklist[] | null {
       setLoaded(true);
       loadBlocklists();
     }
-  });
+  }, [loaded]);
 
   return blocklists;
 }

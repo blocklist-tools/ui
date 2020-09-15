@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from "react";
+import React, {FunctionComponent} from "react";
 import {Blocklist} from "../../services/ApiClient";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGavel, faHome, faFileDownload, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'

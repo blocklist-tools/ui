@@ -22,7 +22,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf docs && cp -r build docs",
+    "build": "react-scripts build",
+    "deploy": "react-scripts build && rm -rf serve/* && cp -r build/* serve/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

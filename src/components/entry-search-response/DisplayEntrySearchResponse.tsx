@@ -1,6 +1,8 @@
 import React, {FunctionComponent} from "react";
 import {EntrySearchResponse, EntrySummary} from "../../services/ApiClient";
 import "./DisplayEntrySearchResponse.css";
+import {faCheck, faBan} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface IDisplayEntrySearchResponse {
   entrySearchResponse: EntrySearchResponse | null
@@ -20,15 +22,29 @@ function dateSpan(date: Date|null, altText: string | null) {
   return (<span title={title}>{text}</span>)
 }
 
+function diffLink(versionId: string|null, dateSpan: JSX.Element) {
+  if (versionId) {
+    return (
+      <a href={`/versions/${versionId}/diff`}>
+        {dateSpan}
+      </a>
+    )
+  }
+  return dateSpan;
+}
+
 function includedIcon(entry: EntrySummary) {
   const isIncluded = entry.removedVersionId !== null;
   const className = [
     'included-icon',
     isIncluded ? 'is-removed' : 'is-included'
   ].join(' ');
-  const icon = isIncluded ? '🚫' : '✔';
+  const icon = isIncluded ? faBan : faCheck;
 
-  return (<span className={className}>{icon}</span>);
+  return (
+    <span className={className}>
+      <FontAwesomeIcon icon={icon} />
+    </span>);
 }
 
 function entryStatus(entry: EntrySummary) {
@@ -40,16 +56,14 @@ function entryStatus(entry: EntrySummary) {
   if (entry.addedOn.toISOString() === entry.listAddedOn.toISOString()) {
     initialVersion = 'Initial Version';
   }
+
+  const addedDate = dateSpan(entry.addedOn, initialVersion);
+  const removedDate = dateSpan(entry.removedOn, stillBlocked);
+
   return (
     <div>
       {includedIcon(entry)}
-      <a href={`/versions/${entry.addedVersionId}/diff`}>
-        {dateSpan(entry.addedOn, initialVersion)}
-      </a>
-      -
-      <a href={`/versions/${entry.removedVersionId}/diff`}>
-        {dateSpan(entry.removedOn, stillBlocked)}
-      </a>
+      {diffLink(entry.addedVersionId, addedDate)} - {diffLink(entry.removedVersionId, removedDate)}
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from "react";
 import "./EntrySearch.css";
+import {faSearch, faBackspace} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface IEntrySearch {
   value: string
@@ -54,8 +56,8 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
         value={query}
         onChange={handleChangedQuery}
       />
-      <button type="button" title="Clear form" onClick={handleClear}>&#9003;</button>
-      <button type={"submit"}>&#128269;</button>
+      <button type="button" title="Clear form" onClick={handleClear}><FontAwesomeIcon icon={faBackspace} /></button>
+      <button type={"submit"}><FontAwesomeIcon icon={faSearch} /></button>
     </form>
   );
 };

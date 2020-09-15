@@ -30,6 +30,7 @@
   border-left: none;
 }
 
-.component-header-nav a:visited {
+.component-header-nav a:visited,
+.component-header-nav a {
   color: inherit;
 }

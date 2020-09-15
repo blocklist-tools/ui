@@ -17,8 +17,14 @@ services:
     working_dir: /opt/ui
     entrypoint: "npm"
     command: "run-script build"
-    ports:
-      - 3000:3000
+
+  deploy:
+    image: node:14-buster
+    volumes:
+      - "${PWD}/:/opt/ui"
+    working_dir: /opt/ui
+    entrypoint: "npm"
+    command: "run-script deploy"
 
   dev:
     image: node:14-buster
@@ -29,9 +35,3 @@ services:
     command: ["run", "start"]
     ports:
       - 3000:3000
-
-  ui:
-    build:
-      context: .
-    ports:
-    - 8282:80

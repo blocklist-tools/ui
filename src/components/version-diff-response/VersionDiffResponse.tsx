@@ -6,32 +6,49 @@ interface IVersionDiffResponse {
   versionDiff: VersionDiff | null
 }
 
-export const VersionDiffResponse: FunctionComponent<IVersionDiffResponse> = (props: IVersionDiffResponse) =>  {
-    if (!props.versionDiff) {
-      return null;
-    }
+export const VersionDiffResponse: FunctionComponent<IVersionDiffResponse> = (props: IVersionDiffResponse) => {
+  if (!props.versionDiff) {
+    return null;
+  }
 
-    if (props.versionDiff.lines.length === 0) {
-      return (
-        <section>
-          Lists match!
-        </section>
-      )
-    }
+  if (props.versionDiff.lines.length === 0) {
+    return (
+      <section>
+        Lists match!
+      </section>
+    )
+  }
 
-  const diffContent = props.versionDiff.lines.map((line, index) => {
+  const diffContent = [];
+  for (let i=0; i < props.versionDiff.lines.length; i++) {
+    let line = props.versionDiff.lines[i];
+    if (line.trim().length === 0) {
+      continue;
+    }
     if (line === '---') {
-      return (<div className={'line-break'} key={index}>---</div>);
+      if (i !== 0 && i < props.versionDiff.lines.length - 2) {
+        diffContent.push(<div className={'line-break'} key={i}>---</div>);
+      }
+      continue;
     }
+
+    let first = '\u00A0';
     let lineClass = 'existing-line';
     if (line.startsWith('-')) {
+      first = '-';
       lineClass = 'removed-line';
     }
     if (line.startsWith('+')) {
+      first = '+'
       lineClass = 'added-line';
     }
-    return (<div key={index} className={lineClass}>{line}</div>)
-  });
+    line = line.substring(1);
+    diffContent.push(
+      <div key={i} className={lineClass}>
+        <span className="line-status">{first}</span><span className="line">{line}</span>
+      </div>
+    )
+  }
 
   return (
       <section className="component-version-diff-response basic-section">{diffContent}</section>
