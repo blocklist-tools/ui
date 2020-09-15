@@ -34,6 +34,6 @@ export const VersionDiffResponse: FunctionComponent<IVersionDiffResponse> = (pro
   });
 
   return (
-      <section className="component-version-diff-response">{diffContent}</section>
+      <section className="component-version-diff-response basic-section">{diffContent}</section>
   );
 };
