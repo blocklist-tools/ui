@@ -23,10 +23,23 @@ export interface EntrySummary {
   listAddedOn: Date
 }
 
+export interface DiffSection {
+  hasAdditions: boolean
+  hasSubtractions: boolean
+  lines: DiffLine[]
+}
+
+export interface DiffLine {
+  isAddition: boolean
+  isSubtraction: boolean
+  isNeutral: boolean
+  value: string
+}
+
 export interface VersionDiff {
   firstVersion: string
   secondVersion: string|null
-  lines: string[]
+  sections: DiffSection[]
 }
 
 export interface Blocklist {
@@ -129,10 +142,51 @@ export default class ApiClient {
       return ApiError.fromMessage(error);
     }
     const body = await response.text();
+    const sections = [] as DiffSection[];
+    let currentSection = {
+      id: 0,
+      hasAdditions: false,
+      hasSubtractions: false,
+      lines: []
+    } as DiffSection;
+    body.split(/\r?\n/).forEach((line: string, index: number) => {
+      if (line.trim().length === 0) {
+        return;
+      }
+      if (line === '---') {
+        if (currentSection.lines.length > 0) {
+          sections.push(currentSection);
+        }
+
+        currentSection = {
+          hasAdditions: false,
+          hasSubtractions: false,
+          lines: []
+        }
+        return;
+      }
+
+      let diffLine = {
+        id: index,
+        isAddition: line.startsWith('+'),
+        isSubtraction: line.startsWith('-'),
+        isNeutral: line.startsWith(' '),
+        value: line.substring(1)
+      };
+
+      currentSection.hasSubtractions = currentSection.hasSubtractions || diffLine.isSubtraction;
+      currentSection.hasAdditions = currentSection.hasAdditions || diffLine.isAddition;
+      currentSection.lines.push(diffLine);
+    });
+
+    if (currentSection.lines.length > 0) {
+      sections.push(currentSection);
+    }
+
     return {
       firstVersion: firstVersion,
       secondVersion: secondVersion,
-      lines: body.split(/\r?\n/)
+      sections: sections
     };
   }
 
