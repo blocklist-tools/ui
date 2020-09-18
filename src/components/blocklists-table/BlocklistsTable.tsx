@@ -33,7 +33,7 @@ export const BlocklistsTable: FunctionComponent<IBlocklistsTable> = (props: IBlo
           </li>
           <li>
             <a href={blocklist.issuesUrl} rel="noopener noreferrer" target="_blank">
-              <FontAwesomeIcon className='fa-fw' icon={faExclamationCircle}></FontAwesomeIcon>
+              <FontAwesomeIcon className='fa-fw' icon={faExclamationCircle} />
               Issues
             </a>
           </li>

@@ -19,11 +19,10 @@ export const EntrySearchPage: FunctionComponent = () =>  {
   }
 
   function updateEntrySearch(query: string) {
-    let queryString = '';
     if (query && query.length > 0) {
-      queryString = '?q=' + encodeURIComponent(query);
+      let queryString = '?q=' + encodeURIComponent(query);
+      history.push("/entries/search" + queryString);
     }
-    history.push("/entries/search" + queryString);
   }
 
   return (

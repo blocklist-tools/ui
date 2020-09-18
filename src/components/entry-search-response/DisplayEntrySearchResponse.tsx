@@ -3,6 +3,7 @@ import {EntrySearchResponse, EntrySummary} from "../../services/ApiClient";
 import "./DisplayEntrySearchResponse.css";
 import {faCheck, faBan} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 interface IDisplayEntrySearchResponse {
   entrySearchResponse: EntrySearchResponse | null
@@ -25,9 +26,7 @@ function dateSpan(date: Date|null, altText: string | null) {
 function diffLink(isInitialVersion: boolean, versionId: string|null, dateSpan: JSX.Element) {
   if (versionId && !isInitialVersion) {
     return (
-      <a href={`/versions/${versionId}/diff`}>
-        {dateSpan}
-      </a>
+      <Link to={{pathname: `/versions/${versionId}/diff`}}>{dateSpan}</Link>
     )
   }
   return dateSpan;
