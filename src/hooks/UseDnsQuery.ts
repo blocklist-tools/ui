@@ -3,10 +3,12 @@ import ApiError from "../exceptions/ApiError";
 import ApiClient, {DnsQuery} from "../services/ApiClient";
 
 export function UseDnsQuery(domainName: string|null, queryType: string): DnsQuery|null {
-  const [dnsQuery, setDnsQuery] = useState<DnsQuery|null>(null);
+  const [dnsQuery, setDnsQuery] = useState<String|null>(null);
+  const [dnsQueryResponse, setDnsQueryResponse] = useState<DnsQuery|null>(null);
 
   function getDnsQuery(domainName: string, queryType: string) {
     clearDnsQuery();
+    setDnsQuery(`${domainName.toLowerCase()} ${queryType.toLowerCase()}`);
     ApiClient
       .dnsQuery(domainName, queryType)
       .then(applyDnsResponse);
@@ -14,24 +16,25 @@ export function UseDnsQuery(domainName: string|null, queryType: string): DnsQuer
 
   function applyDnsResponse(dnsResponse: DnsQuery|ApiError) {
     if (dnsResponse instanceof ApiError) {
-      return clearDnsQuery();
+      return setDnsQueryResponse(null);
     }
-    setDnsQuery(dnsResponse);
+    setDnsQueryResponse(dnsResponse);
   }
 
   function clearDnsQuery() {
     setDnsQuery(null);
+    setDnsQueryResponse(null);
   }
 
   useEffect(() => {
     if (!domainName || !queryType) {
       return clearDnsQuery();
     }
-    if (dnsQuery && dnsQuery.queryName?.toLowerCase() === domainName.toLowerCase() && dnsQuery.queryType === queryType) {
+    if (dnsQuery === `${domainName.toLowerCase()} ${queryType.toLowerCase()}`) {
       return;
     }
     getDnsQuery(domainName, queryType);
   });
 
-  return dnsQuery;
+  return dnsQueryResponse;
 }

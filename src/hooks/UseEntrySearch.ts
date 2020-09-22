@@ -4,9 +4,11 @@ import ApiClient, {EntrySearchResponse} from "../services/ApiClient";
 
 export function UseEntrySearch(query: string | null): EntrySearchResponse | null {
   const [entrySearchResponse, setEntrySearchResponse] = useState<EntrySearchResponse | null>(null);
+  const [entrySearch, setEntrySearch] = useState<String | null>(null);
 
   function searchEntries(entry: string) {
     clearResponse();
+    setEntrySearch(entry.toLowerCase());
     ApiClient
       .entrySearch(entry)
       .then(applyEntrySearchResponse);
@@ -20,6 +22,7 @@ export function UseEntrySearch(query: string | null): EntrySearchResponse | null
   }
 
   function clearResponse() {
+    setEntrySearch(null);
     setEntrySearchResponse(null);
   }
 
@@ -27,7 +30,7 @@ export function UseEntrySearch(query: string | null): EntrySearchResponse | null
     if (!query || query.length === 0) {
       return clearResponse();
     }
-    if (entrySearchResponse && entrySearchResponse.query?.toLowerCase() === query.toLowerCase()) {
+    if (entrySearch === query.toLowerCase()) {
       return;
     }
     searchEntries(query);

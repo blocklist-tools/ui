@@ -67,6 +67,17 @@ function entryStatus(entry: EntrySummary) {
   );
 }
 
+function warnOnNotFullyQualified(query: string) {
+  if (query.indexOf('.') === -1) {
+    return (
+      <p>
+        The search does not contain a dot in the name.
+        Perhaps you forgot to include <strong>.com</strong> or another top level domain?
+      </p>
+    )
+  }
+}
+
 export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchResponse> = (props: IDisplayEntrySearchResponse) => {
   if (!props.entrySearchResponse) {
     return null;
@@ -74,7 +85,13 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
   let content;
   if (props.entrySearchResponse.summaries.length === 0) {
     content = (
-      <div>No known list contains {props.entrySearchResponse.query}</div>
+      <div>
+        <p>
+          No known list contains <strong>{props.entrySearchResponse.query}</strong>
+        </p>
+
+        {warnOnNotFullyQualified(props.entrySearchResponse.query)}
+      </div>
     );
   } else {
     const listItems = props.entrySearchResponse.summaries.map((entry) => {
