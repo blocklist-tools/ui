@@ -97,7 +97,7 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
     const listItems = props.entrySearchResponse.summaries.map((entry) => {
       return (
         <li key={entry.addedVersionId}>
-          <div className={'blocklist-name'}>{entry.blocklistName}</div>
+          <Link className={'blocklist-name'} to={{pathname: `/blocklists/${entry.blocklistId}`}}>{entry.blocklistName}</Link>
           {entryStatus(entry)}
         </li>
       );

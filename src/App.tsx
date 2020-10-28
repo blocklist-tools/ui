@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {BlocklistsPage} from "./components/blocklists-page/BlocklistsPage";
 import {VersionDiffPage} from "./components/version-diff-page/VersionDiffPage";
 import {HeaderNav} from "./components/header-nav/HeaderNav";
+import {BlocklistPage} from "./components/blocklist-page/BlocklistPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <main>
             <Switch>
+              <Route path='/blocklists/:blocklistId' component={BlocklistPage} />
               <Route path='/blocklists' component={BlocklistsPage} />
               <Route path='/entries/search' component={EntrySearchPage} />
               <Route path={[

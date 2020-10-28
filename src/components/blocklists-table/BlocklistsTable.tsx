@@ -3,6 +3,7 @@ import {Blocklist} from "../../services/ApiClient";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGavel, faHome, faFileDownload, faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import "./BlocklistsTable.css";
+import {Link} from "react-router-dom";
 
 interface IBlocklistsTable {
   blocklists: Blocklist[] | null;
@@ -15,9 +16,7 @@ export const BlocklistsTable: FunctionComponent<IBlocklistsTable> = (props: IBlo
   let table = props.blocklists.map((blocklist) => {
     return (
       <section className='blocklist-card' key={blocklist.id}>
-        <a className="blocklist-name" href={blocklist.homepageUrl} rel="noopener noreferrer" target="_blank">
-          {blocklist.name}
-        </a>
+        <Link className={'blocklist-name'} to={{pathname: `/blocklists/${blocklist.id}`}}>{blocklist.name}</Link>
         <ul className='blocklist-table-details-list'>
           <li>
             <a href={blocklist.homepageUrl} rel="noopener noreferrer" target="_blank">

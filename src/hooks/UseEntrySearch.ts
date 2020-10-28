@@ -8,7 +8,7 @@ export function UseEntrySearch(query: string | null): EntrySearchResponse | null
 
   function searchEntries(entry: string) {
     clearResponse();
-    setEntrySearch(entry.toLowerCase());
+    setEntrySearch(entry);
     ApiClient
       .entrySearch(entry)
       .then(applyEntrySearchResponse);
@@ -30,10 +30,11 @@ export function UseEntrySearch(query: string | null): EntrySearchResponse | null
     if (!query || query.length === 0) {
       return clearResponse();
     }
-    if (entrySearch === query.toLowerCase()) {
+    let normalizedQuery = query.toLowerCase().trim();
+    if (entrySearch === normalizedQuery) {
       return;
     }
-    searchEntries(query);
+    searchEntries(normalizedQuery);
   });
 
   return entrySearchResponse;

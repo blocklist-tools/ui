@@ -11,7 +11,8 @@
 }
 
 .component-display-entry-search-response .blocklist-name {
-    font-weight: bold;
+  font-weight: bold;
+  color: #00CED1;
 }
 
 .component-display-entry-search-response .included-icon {

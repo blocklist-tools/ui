@@ -204,4 +204,19 @@ export default class ApiClient {
     }
     return await response.json() as Blocklist[];
   }
+
+  public static async fetchList(id: string) {
+    const response = await this.safeFetch(`${this.rootApiUrl}/blocklists/${id}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Fetch list failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      return ApiError.fromMessage(error);
+    }
+    return await response.json() as Blocklist;
+  }
 }
