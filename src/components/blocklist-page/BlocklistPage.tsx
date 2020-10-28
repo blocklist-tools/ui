@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle, faFileDownload, faGavel, faHome} from "@fortawesome/free-solid-svg-icons";
 
 export const BlocklistPage: FunctionComponent = () =>  {
-  const { blocklistId } = useParams();
+  const { blocklistId } = useParams() as any;
   const blocklist = UseBlocklist(blocklistId);
 
   if (!blocklist) {

@@ -11,7 +11,7 @@ export function UseQueryParam<T>(paramName: string, defaultValue: T): T {
       console.log('setting query to ', value);
       setQueryParamState(value as T);
     }
-  }, [queryParam, paramName, defaultValue, queryParamState]);
+  });
 
   return queryParamState;
 }

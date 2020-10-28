@@ -7,7 +7,7 @@ import {UseQueryParam} from "../../hooks/UseQueryParam";
 
 export const VersionDiffPage: FunctionComponent = () =>  {
   const diffType = UseQueryParam('type', 'intersection');
-  const { firstVersion, secondVersion } = useParams();
+  const { firstVersion, secondVersion } = useParams() as any;
   const versionDiff = UseVersionDiff(firstVersion, secondVersion);
   const history = useHistory();
 
