@@ -53,6 +53,16 @@ export interface Blocklist {
   licenseType: string
 }
 
+export interface Version {
+  id: string
+  blocklistId: string
+  numEntries: number
+  rawSha256: string
+  parsedSha256: string
+  createdOn: Date
+  lastSeen: Date
+}
+
 export default class ApiClient {
   private static readonly rootApiUrl = process.env.REACT_APP_ROOT_API_URL;
 
@@ -218,5 +228,25 @@ export default class ApiClient {
       return ApiError.fromMessage(error);
     }
     return await response.json() as Blocklist;
+  }
+
+  public static async fetchVersions(blocklistId: string, page: number) {
+    const response = await this.safeFetch(`${this.rootApiUrl}/blocklists/${blocklistId}/versions?page=${page}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Fetch versions failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      return ApiError.fromMessage(error);
+    }
+    let rawVersions = await response.json() as any[];
+    for (let i=0; i < rawVersions.length; i++) {
+      rawVersions[i].createdOn = new Date(rawVersions[i].createdOn);
+      rawVersions[i].lastSeen = new Date(rawVersions[i].lastSeen);
+    }
+    return rawVersions as Version[];
   }
 }

@@ -1,12 +1,34 @@
 import React, {FunctionComponent} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {UseBlocklist} from "../../hooks/UseBlocklist";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle, faFileDownload, faGavel, faHome} from "@fortawesome/free-solid-svg-icons";
+import {UseVersions} from "../../hooks/UseVersions";
 
 export const BlocklistPage: FunctionComponent = () =>  {
   const { blocklistId } = useParams() as any;
   const blocklist = UseBlocklist(blocklistId);
+  const versions = UseVersions(blocklistId, 0);
+
+  function versionsList() {
+    if (!versions || versions.length === 0) {
+      return (<div />);
+    }
+
+    let versionsList = versions.map((version) => {
+      let dateText = version.createdOn.toDateString();
+      let dateTitle = version.createdOn.toISOString();
+      let entriesText = Intl.NumberFormat().format(version.numEntries);
+      return (
+        <li>
+          <Link to={{pathname: `/versions/${version.id}/diff`}}>
+            <span title={dateTitle}>{dateText}</span>
+          </Link>: {entriesText} entries
+        </li>
+      );
+    });
+    return (<ul>{versionsList}</ul>)
+  }
 
   if (!blocklist) {
     return <div />
@@ -43,6 +65,9 @@ export const BlocklistPage: FunctionComponent = () =>  {
           </a>
         </li>
       </ul>
+
+      <h3>Recent Versions</h3>
+      {versionsList()}
     </section>
   );
 };

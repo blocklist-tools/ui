@@ -9,7 +9,11 @@ interface IVersionDiffResponse {
 
 export const VersionDiffResponse: FunctionComponent<IVersionDiffResponse> = (props: IVersionDiffResponse) => {
   if (!props.versionDiff) {
-    return null;
+    return (
+      <section>
+        Doing a list diff is <strong>very slow</strong>. Please be patient...
+      </section>
+    )
   }
 
   if (props.versionDiff.sections.length === 0) {
