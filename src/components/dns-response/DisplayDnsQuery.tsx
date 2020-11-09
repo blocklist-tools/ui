@@ -26,11 +26,13 @@ export const DisplayDnsQuery: FunctionComponent<IDisplayDnsQuery> = (props: IDis
           <option>AAAA</option>
           <option>CAA</option>
           <option>CNAME</option>
+          <option>HTTPS</option>
           <option>MX</option>
           <option>NS</option>
           <option>PTR</option>
           <option>SOA</option>
           <option>SRV</option>
+          <option>SVCB</option>
           <option>TXT</option>
         </select>
       </h2>
