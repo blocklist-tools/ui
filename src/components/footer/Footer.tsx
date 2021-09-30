@@ -13,7 +13,7 @@ export const Footer: FunctionComponent = () =>  {
             to generate the difference. Using the diffs, I can still generate the full list for any given version without having
             to save the entire list. New versions are added daily and currently only uses 23 GB. You might be curious where
             I got 50,000 unique versions from. The majority of these lists are served on Github, so it was just a simple matter
-            of walking the Git history and throwing out any non-trivial changes.
+            of walking the Git history and throwing out any trivial commits.
             See <a href="https://github.com/blocklist-tools/github-history-generator">github-history-generator</a> Enjoy!
           </p>
 
