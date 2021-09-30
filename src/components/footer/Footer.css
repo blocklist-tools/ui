@@ -1,4 +1,6 @@
 .component-footer {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
+    max-width: 960px;
+    padding: 0;
 }
