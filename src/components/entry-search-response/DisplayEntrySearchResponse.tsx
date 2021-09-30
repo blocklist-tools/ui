@@ -32,7 +32,7 @@ function diffLink(isInitialVersion: boolean, versionId: string|null, dateSpan: J
   return dateSpan;
 }
 
-function includedIcon(entry: EntrySummary) {
+function includedIcon(entry: {removedVersionId: string|null}) {
   const isIncluded = entry.removedVersionId !== null;
   const className = [
     'included-icon',
@@ -116,6 +116,18 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
         Lists containing {props.entrySearchResponse.query}
       </h2>
       {content}
+
+      <div>
+        Legend
+        <ul>
+          <li>
+            {includedIcon({removedVersionId: null})}: Included the latest version of the list
+          </li>
+          <li>
+            {includedIcon({removedVersionId: 'example'})}: Has been removed from the latest version of the list
+          </li>
+        </ul>
+      </div>
     </section>
   );
 };

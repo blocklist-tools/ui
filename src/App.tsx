@@ -10,6 +10,14 @@ import {HeaderNav} from "./components/header-nav/HeaderNav";
 import {BlocklistPage} from "./components/blocklist-page/BlocklistPage";
 
 function App() {
+
+  /**
+   * Hello! If you are reading this, please understand that this was my very first experience
+   * with React. There are a lot of things I would do differently now that I've learned more.
+   * I hope to one day get back in here and get it updated and add new features, but I'm
+   * not sure when that will be. It is certainly not a priority. PRs welcome!
+   */
+
   return (
     <React.Fragment>
       <BrowserRouter>
