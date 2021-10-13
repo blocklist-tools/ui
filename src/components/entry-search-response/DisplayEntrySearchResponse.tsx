@@ -5,23 +5,10 @@ import {faCheck, faBan} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
 import {EntryStatus} from "../EntryStatus";
+import {IncludedIcon} from "../IncludedIcon";
 
 interface IDisplayEntrySearchResponse {
   entrySearchResponse: EntrySearchResponse | null
-}
-
-function includedIcon(entry: {removedVersionId: string|null}) {
-  const isIncluded = entry.removedVersionId !== null;
-  const className = [
-    'included-icon',
-    isIncluded ? 'is-removed' : 'is-included'
-  ].join(' ');
-  const icon = isIncluded ? faBan : faCheck;
-
-  return (
-    <span className={className}>
-      <FontAwesomeIcon icon={icon} />
-    </span>);
 }
 
 function warnOnNotFullyQualified(query: string) {
@@ -78,10 +65,10 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
         Legend
         <ul>
           <li>
-            {includedIcon({removedVersionId: null})}: Included the latest version of the list
+            <IncludedIcon isIncluded={true}/>: Included the latest version of the list
           </li>
           <li>
-            {includedIcon({removedVersionId: 'example'})}: Has been removed from the latest version of the list
+            <IncludedIcon isIncluded={false}/>: Has been removed from the latest version of the list
           </li>
         </ul>
       </div>

@@ -9,9 +9,9 @@ interface IIncludedIconProps {
 export const IncludedIcon: FunctionComponent<IIncludedIconProps> = ({isIncluded}) => {
   const className = [
     'included-icon',
-    isIncluded ? 'is-removed' : 'is-included'
+    isIncluded ? 'is-included' : 'is-removed'
   ].join(' ');
-  const icon = isIncluded ? faBan : faCheck;
+  const icon = isIncluded ? faCheck : faBan;
 
   return (
     <span className={className}>
