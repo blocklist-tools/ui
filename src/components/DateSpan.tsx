@@ -2,19 +2,10 @@ import React, {FunctionComponent} from "react";
 
 interface IDateSpanProps {
   date: Date|null,
-  altText: string|null
+  children: React.ReactNode
 }
 
-export const DateSpan: FunctionComponent<IDateSpanProps> = ({date, altText}) => {
-  let text = '';
-  let title = null;
-  if (date) {
-    text = date.toDateString();
-    title = date.toISOString();
-  }
-  if (altText) {
-    text = altText;
-  }
-  title = title || text;
-  return (<span title={title}>{text}</span>)
+export const DateSpan: FunctionComponent<IDateSpanProps> = ({date, children}) => {
+  const title = date ? date.toISOString() : '';
+  return (<span title={title}>{children}</span>)
 }

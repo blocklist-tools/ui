@@ -9,16 +9,21 @@ interface IEntryStatusProps {
 }
 
 export const EntryStatus: FunctionComponent<IEntryStatusProps> = ({entry}) => {
-  const initialVersion = entry.addedOn === entry.listAddedOn;
+  const initialVersion = entry.addedOn.toISOString() === entry.listAddedOn.toISOString();
 
   return (
     <div>
       <IncludedIcon isIncluded={entry.removedVersionId === null}/>
       <DiffLink versionId={entry.addedVersionId} initialVersion={initialVersion}>
-        <DateSpan date={entry.addedOn} altText={initialVersion ? 'Initial Version' : null} />
-      </DiffLink> -
+        <DateSpan date={entry.addedOn}>
+          {initialVersion ? 'Initial Version' : entry.addedOn.toDateString()}
+        </DateSpan>
+      </DiffLink>
+      &nbsp;—&nbsp;
       <DiffLink versionId={entry.removedVersionId}>
-        <DateSpan date={entry.removedOn} altText={entry.removedOn ? null : 'Current Version'} />
+        <DateSpan date={entry.removedOn}>
+          {entry.removedOn ? entry.removedOn.toDateString() : 'Current Version'}
+        </DateSpan>
       </DiffLink>
     </div>
   );
