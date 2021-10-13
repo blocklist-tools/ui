@@ -1,9 +1,10 @@
 import React, {FunctionComponent} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {UseBlocklist} from "../../hooks/UseBlocklist";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faExclamationCircle, faFileDownload, faGavel, faHome} from "@fortawesome/free-solid-svg-icons";
 import {UseVersions} from "../../hooks/UseVersions";
+import {DiffLink} from "../DiffLink";
 
 export const BlocklistPage: FunctionComponent = () =>  {
   const { blocklistId } = useParams() as any;
@@ -21,9 +22,9 @@ export const BlocklistPage: FunctionComponent = () =>  {
       let entriesText = Intl.NumberFormat().format(version.numEntries);
       return (
         <li>
-          <Link to={{pathname: `/versions/${version.id}/diff`}}>
+          <DiffLink versionId={version.id}>
             <span title={dateTitle}>{dateText}</span>
-          </Link>: {entriesText} entries
+          </DiffLink>: {entriesText} entries
         </li>
       );
     });

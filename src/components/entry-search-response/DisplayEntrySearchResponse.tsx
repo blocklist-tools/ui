@@ -1,35 +1,13 @@
 import React, {FunctionComponent} from "react";
-import {EntrySearchResponse, EntrySummary} from "../../services/ApiClient";
+import {EntrySearchResponse} from "../../services/ApiClient";
 import "./DisplayEntrySearchResponse.css";
 import {faCheck, faBan} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from "react-router-dom";
+import {EntryStatus} from "../EntryStatus";
 
 interface IDisplayEntrySearchResponse {
   entrySearchResponse: EntrySearchResponse | null
-}
-
-function dateSpan(date: Date|null, altText: string | null) {
-  let text = '';
-  let title = null;
-  if (date) {
-    text = date.toDateString();
-    title = date.toISOString();
-  }
-  if (altText) {
-    text = altText;
-  }
-  title = title || text;
-  return (<span title={title}>{text}</span>)
-}
-
-function diffLink(isInitialVersion: boolean, versionId: string|null, dateSpan: JSX.Element) {
-  if (versionId && !isInitialVersion) {
-    return (
-      <Link to={{pathname: `/versions/${versionId}/diff`}}>{dateSpan}</Link>
-    )
-  }
-  return dateSpan;
 }
 
 function includedIcon(entry: {removedVersionId: string|null}) {
@@ -44,27 +22,6 @@ function includedIcon(entry: {removedVersionId: string|null}) {
     <span className={className}>
       <FontAwesomeIcon icon={icon} />
     </span>);
-}
-
-function entryStatus(entry: EntrySummary) {
-  let stillBlocked = null;
-  if (!entry.removedOn) {
-    stillBlocked = 'Current Version';
-  }
-  let initialVersion = null;
-  if (entry.addedOn.toISOString() === entry.listAddedOn.toISOString()) {
-    initialVersion = 'Initial Version';
-  }
-
-  const addedDate = dateSpan(entry.addedOn, initialVersion);
-  const removedDate = dateSpan(entry.removedOn, stillBlocked);
-
-  return (
-    <div>
-      {includedIcon(entry)}
-      {diffLink(!!initialVersion, entry.addedVersionId, addedDate)} - {diffLink(false, entry.removedVersionId, removedDate)}
-    </div>
-  );
 }
 
 function warnOnNotFullyQualified(query: string) {
@@ -98,7 +55,7 @@ export const DisplayEntrySearchResponse: FunctionComponent<IDisplayEntrySearchRe
       return (
         <li key={entry.addedVersionId}>
           <Link className={'blocklist-name'} to={{pathname: `/blocklists/${entry.blocklistId}`}}>{entry.blocklistName}</Link>
-          {entryStatus(entry)}
+          <EntryStatus entry={entry} />
         </li>
       );
     });

@@ -18,7 +18,7 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
   const textInput = useRef<HTMLInputElement | null>(null);
 
   function handleChangedQuery(event: { target: HTMLInputElement; }) {
-    setQuery(event.target.value.trim().toLowerCase());
+    setQuery(event.target.value.replace(/\s/g,'').toLowerCase());
   }
 
   function handleSubmit(event: React.FormEvent) {
@@ -45,7 +45,7 @@ export const EntrySearch: FunctionComponent<IEntrySearch> = (props: IEntrySearch
         ref={textInput}
         id="entry-search-input"
         title="Search for domain name or URL"
-        type="text"
+        type="search"
         spellCheck="false"
         autoCapitalize="false"
         autoCorrect="false"

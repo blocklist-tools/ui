@@ -16,6 +16,8 @@
   flex-grow:2;
   /* And hide the input's outline, so the form looks like the outline */
   border:none;
+  border-radius:0;
+  -webkit-appearance: none;
 }
 .component-entry-search button {
   padding: 0 8px 0 8px;
