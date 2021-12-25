@@ -1,15 +1,16 @@
 import React, {FunctionComponent} from "react";
 import {faBan, faCheck} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './IncludedIcon.module.css';
 
-interface IIncludedIconProps {
+interface IncludedIconProps {
   isIncluded: boolean
 }
 
-export const IncludedIcon: FunctionComponent<IIncludedIconProps> = ({isIncluded}) => {
+export const IncludedIcon: FunctionComponent<IncludedIconProps> = ({isIncluded}) => {
   const className = [
-    'included-icon',
-    isIncluded ? 'is-included' : 'is-removed'
+    styles.includedIcon,
+    isIncluded ? styles.isIncluded : styles.isRemoved
   ].join(' ');
   const icon = isIncluded ? faCheck : faBan;
 

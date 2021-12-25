@@ -1,0 +1,52 @@
+.container {
+  color: var(--nav-color);
+  display: block;
+  background: var(--nav-background-color);
+  width: 100%;
+  box-shadow: 0 1px 3px 0 #000;
+}
+
+.container ul {
+  padding: 0;
+  list-style: none;
+  margin: 0 auto 0 auto;
+}
+
+.container ul.outer {
+  max-width: 960px;
+}
+
+.outer li {
+  display: inline-block;
+}
+
+.buttons li {
+  display: inline-block;
+  padding: 10px 10px 10px 10px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.buttons li:hover,
+.buttons li:active,
+.buttons a:active {
+  background-color: #0a121b;
+  color: #fff;
+}
+
+.buttons li + li {
+  border-left: none;
+}
+
+.container a:visited,
+.container a {
+  color: inherit;
+}
+
+.container a:hover {
+  text-decoration: none;
+}
+
+.container .right {
+  float: right;
+}

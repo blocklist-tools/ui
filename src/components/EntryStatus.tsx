@@ -1,22 +1,31 @@
-import React, {FunctionComponent} from "react";
+import React, {FunctionComponent, useState} from "react";
 import {DateSpan} from "./DateSpan";
-import {EntrySummary} from "../services/ApiClient";
-import {DiffLink} from "./DiffLink";
 import {IncludedIcon} from "./IncludedIcon";
+import {EntrySummary} from "../Models";
+import {DiffLink} from "./DiffLink";
 
 interface IEntryStatusProps {
   entry: EntrySummary
 }
 
+const INITIAL_VERSION_TEXT = 'Initial Version';
+
 export const EntryStatus: FunctionComponent<IEntryStatusProps> = ({entry}) => {
-  const initialVersion = entry.addedOn.toISOString() === entry.listAddedOn.toISOString();
+  const isInitialVersion = entry.addedOn.toISOString() === entry.listAddedOn.toISOString();
+  let [startSpanText, setStartSpanText] = useState<string>(isInitialVersion ? INITIAL_VERSION_TEXT : entry.addedOn.toDateString());
+
+  function toggleInitialText() {
+    startSpanText === INITIAL_VERSION_TEXT ? setStartSpanText(entry.addedOn.toDateString()) : setStartSpanText(INITIAL_VERSION_TEXT);
+  }
 
   return (
     <div>
       <IncludedIcon isIncluded={entry.removedVersionId === null}/>
-      <DiffLink versionId={entry.addedVersionId} initialVersion={initialVersion}>
+      <DiffLink versionId={entry.addedVersionId} initialVersion={isInitialVersion}>
         <DateSpan date={entry.addedOn}>
-          {initialVersion ? 'Initial Version' : entry.addedOn.toDateString()}
+          <span onClick={toggleInitialText} className={'clickable'}>
+            {startSpanText}
+          </span>
         </DateSpan>
       </DiffLink>
       &nbsp;—&nbsp;

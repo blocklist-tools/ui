@@ -1,0 +1,12 @@
+
+.includedIcon {
+  padding-right: 10px;
+}
+
+.isIncluded {
+  color: #006400;
+}
+
+.isRemoved {
+  color: #8b0000;
+}

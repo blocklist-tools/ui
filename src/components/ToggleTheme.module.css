@@ -1,0 +1,12 @@
+
+.container {
+  padding: 10px 10px 10px 10px;
+}
+
+.container .sun {
+  color: gold;
+}
+
+.container .moon {
+  color: goldenrod;
+}

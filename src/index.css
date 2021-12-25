@@ -1,18 +1,34 @@
 @import-normalize;
 
+:root, :root.darkTheme {
+  --color: #c9d1d9;
+  --background-color: #0d1117;
+  --nav-color: #c9d1d9;
+  --nav-background-color: #161b22;
+  --link-color: #58a6ff;
+}
+
+:root.lightTheme {
+  --color: #24292f;
+  --background-color: #fff;
+  --nav-color: #fff;
+  --nav-background-color: #24292f;
+  --link-color: #0969da;
+}
+
 html {
   height: 100%;
   max-height: 100%;
   padding: 0;
   margin: 0;
   overflow: auto;
+  font-family: "Inter", "system-ui";
+  line-height: 1.2;
 }
 
 body {
-  color: #d9d9d9;
-  background-color: #212121;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  line-height: 1.23536;
+  color: var(--color);
+  background-color: var(--background-color);
   text-rendering: optimizeLegibility;
   height: 100%;
   max-height: 100%;
@@ -21,17 +37,24 @@ body {
   margin: 0;
 }
 
+main {
+  margin: 0 auto 0 auto;
+  flex-flow: row nowrap;
+  max-width: 960px;
+  padding: 0;
+}
+
 code, pre {
   background-color: #0a121b;
   padding: 10px;
   margin: 10px 10px 0 10px;
   font-size: 14px;
-  font-family: "Fira Code", Consolas, "Courier New", monospace;
+  font-family: "Courier New", monospace;
 }
 
 @supports (font-variation-settings: normal) {
   code, dl, pre {
-    font-family: "Fira Code VF", Consolas, "Courier New", monospace;
+    font-family: "Courier New", monospace;
   }
 }
 
@@ -46,18 +69,27 @@ pre {
 }
 
 a {
-  color: #3282d1;
+  color: var(--link-color);
   text-decoration: none;
-  text-shadow: #000 0 0 3px;
 }
 
 a:hover {
-  color: #9CD7F7;
+  text-decoration: underline;
 }
 
 .basic-section {
-  background-color: #061f2f;
-  box-shadow: 0 1px 3px 0 #000;
+  border-color: #30363d;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 6px;
   margin: 0 0 10px 0;
   padding: 1px 5px 10px 5px;
+}
+
+@supports (font-variation-settings: normal) {
+  html { font-family: "Inter var", "system-ui"; }
+}
+
+.clickable {
+  cursor: pointer;
 }

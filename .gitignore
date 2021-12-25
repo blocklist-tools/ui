@@ -10,19 +10,15 @@
 
 # production
 /build
-/serve
 
 # misc
 .DS_Store
 .env.local
-.env.development
 .env.development.local
 .env.test.local
 .env.production.local
+.idea
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-*.iml
-
