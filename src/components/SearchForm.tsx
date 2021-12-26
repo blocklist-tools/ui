@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useRef, useState} from "react";
+import React, {FunctionComponent, useCallback, useEffect, useRef, useState} from "react";
 import {faBackspace, faSearch} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useSearchParams} from "react-router-dom";
@@ -10,27 +10,35 @@ interface SearchFormProps {
 
 export const SearchForm: FunctionComponent<SearchFormProps> = ({onSubmit}) =>  {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState<string>(searchParams.get('q') || '');
+  const getQueryParam = useCallback(() => {
+    return normalize(searchParams.get('q') || '');
+  }, [searchParams]);
+  const [query, setQuery] = useState<string>(getQueryParam());
 
   useEffect(() => {
-    setQuery(searchParams.get('q') || '');
-  }, [searchParams]);
+    const updatedQuery = getQueryParam();
+    setQuery(updatedQuery);
+    onSubmit(updatedQuery);
+  }, [getQueryParam, onSubmit]);
 
   const textInput = useRef<HTMLInputElement | null>(null);
 
   function handleChangedQuery(event: { target: HTMLInputElement; }) {
-    setQuery(event.target.value.replace(/\s/g,'').toLowerCase());
+    setQuery(normalize(event.target.value));
+  }
+
+  function normalize(searchInput: string) {
+    try {
+      searchInput = new URL(searchInput).hostname
+    } catch (e) {}
+    return searchInput.replace(/\s/g,'').toLowerCase();
   }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    let hostname = query;
-    try {
-      hostname = new URL(hostname).hostname
-    } catch (e) {
-    }
-    setQueryParams(hostname || '');
-    onSubmit(hostname);
+    const normalized = normalize(query)
+    setQueryParams(normalized);
+    onSubmit(normalized);
   }
 
   function handleClear() {
