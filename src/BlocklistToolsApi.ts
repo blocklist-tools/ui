@@ -1,5 +1,6 @@
-import {Blocklist, EntrySearchResponse, EntrySummary} from "./Models";
+import {Blocklist, DnsQueryResponse, EntrySearchResponse, EntrySummary} from "./Models";
 import ApiError from "./ApiError";
+import {toast} from "react-hot-toast";
 
 export default class BlocklistToolsApi {
   private static readonly rootApiUrl = process.env.REACT_APP_BLOCKLIST_TOOLS_API_URL;
@@ -36,6 +37,7 @@ export default class BlocklistToolsApi {
     if (response.status !== 200) {
       let error = `Entry search failed: ${response.status} => ${await response.text()}`;
       console.log(error);
+      toast.error('Search failed, please ensure you entered a valid domain.');
       throw ApiError.fromMessage(error);
     }
     const body = await response.json();
@@ -61,6 +63,25 @@ export default class BlocklistToolsApi {
         listAddedOn: new Date(summary.listAddedOn)
       }
     });
+  }
+
+  public static async dnsQuery(domainName: string, queryType: string) {
+    let params = new URLSearchParams();
+    params.append('name', domainName);
+    params.append('type', queryType);
+    const response = await fetch(`${this.rootApiUrl}/dns-query?${params}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+    if (response.status !== 200) {
+      let error = `DNS query failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      toast.error('DNS query failed, please ensure you entered a valid domain.');
+      throw ApiError.fromMessage(error);
+    }
+    const body = await response.json();
+    return body as DnsQueryResponse;
   }
 
 }

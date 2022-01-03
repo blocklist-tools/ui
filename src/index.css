@@ -6,6 +6,7 @@
   --nav-color: #c9d1d9;
   --nav-background-color: #161b22;
   --link-color: #58a6ff;
+  --toast-background: #333;
 }
 
 :root.lightTheme {
@@ -14,6 +15,7 @@
   --nav-color: #fff;
   --nav-background-color: #24292f;
   --link-color: #0969da;
+  --toast-background: #faebd7;
 }
 
 html {
@@ -45,27 +47,15 @@ main {
 }
 
 code, pre {
-  background-color: #0a121b;
-  padding: 10px;
   margin: 10px 10px 0 10px;
-  font-size: 14px;
+  font-size: 0.9rem;
   font-family: "Courier New", monospace;
-}
-
-@supports (font-variation-settings: normal) {
-  code, dl, pre {
-    font-family: "Courier New", monospace;
-  }
+  overflow: scroll;
 }
 
 code {
   display: block;
-  overflow: scroll;
   white-space: nowrap;
-}
-
-pre {
-  overflow: scroll;
 }
 
 a {

@@ -4,6 +4,7 @@ import {IncludedIcon} from "./IncludedIcon";
 import {Link} from "react-router-dom";
 import {EntryStatus} from "./EntryStatus";
 import styles from "./SearchResponse.module.css";
+import {queries} from "@testing-library/react";
 
 interface SearchResponseProps {
   entrySearchResponse: EntrySearchResponse | null
@@ -15,13 +16,13 @@ export const SearchResponse: FunctionComponent<SearchResponseProps> = ({entrySea
   }
 
   if (entrySearchResponse.summaries.length === 0) {
+    let notFoundMessage = `No known list contains the search term.`;
+    if (!entrySearchResponse.query.includes('.')) {
+      notFoundMessage += " Perhaps you forgot to include the root domain (.com) in the search?"
+    }
     return (
-      <div>
-        <p>
-          No known list contains <strong>{entrySearchResponse.query}</strong>
-        </p>
-      </div>
-    );
+      <div><p>{notFoundMessage}</p></div>
+    )
   }
 
   const listItems = entrySearchResponse.summaries.map((entry) => {

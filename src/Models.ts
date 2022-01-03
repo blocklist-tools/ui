@@ -35,3 +35,25 @@ export interface EntrySearchResponse {
   query: string
   summaries: EntrySummary[]
 }
+
+export interface DnsQueryResponse {
+  queryName: string
+  queryType: string
+  response: string
+  rcode: string
+}
+
+export enum DnsQueryTypes {
+  A = 'A',
+  AAAA = 'AAAA',
+  CAA = 'CAA',
+  CNAME = 'CNAME',
+  HTTPS = 'HTTPS',
+  MX = 'MX',
+  NS = 'NS',
+  PTR = 'PTR',
+  SOA = 'SOA',
+  SRV = 'SRV',
+  SVCB = 'SVCB',
+  TXT = 'TXT'
+}
