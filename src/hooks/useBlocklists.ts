@@ -7,16 +7,13 @@ export function useBlocklists(): Blocklist[] {
 
   async function loadBlocklists() {
     let lists: Blocklist[] = [];
-    let complete = false;
-    for (let page=0; !complete; page++) {
-      try {
-        const response = await ApiClient.blocklists(page);
-        lists = lists.concat(response);
-        complete = response.length < 100;
-      } catch {
-        // TODO ERROR ALERT
-        complete = true;
-      }
+    let page = 0;
+    let loading = true;
+
+    while (loading) {
+      const response = await ApiClient.blocklists(page++);
+      lists = lists.concat(response);
+      loading = response.length >= 100;
     }
     setBlocklists(lists);
   }

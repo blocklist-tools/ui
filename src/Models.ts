@@ -43,6 +43,16 @@ export interface DnsQueryResponse {
   rcode: string
 }
 
+export interface Version {
+  id: string
+  blocklistId: string
+  numEntries: number
+  rawSha256: string
+  parsedSha256: string
+  createdOn: Date
+  lastSeen: Date
+}
+
 export enum DnsQueryTypes {
   A = 'A',
   AAAA = 'AAAA',

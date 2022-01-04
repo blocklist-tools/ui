@@ -13,15 +13,24 @@ export const SearchPage: FunctionComponent = () =>  {
   const entryResponse = useEntrySearch(query)
   const dnsResponse = useDnsQuery(query, dnsType)
 
-  return (
-    <>
-      <SearchForm onSubmit={setQuery} />
-      <SearchResponse entrySearchResponse={entryResponse}/>
+  function dnsQueryForm() {
+    if (!query || query.length < 1) {
+      return;
+    }
+    return (
       <DnsQueryForm onSubmit={setDnsType}>
         <code>
           <pre>{dnsResponse?.response}</pre>
         </code>
       </DnsQueryForm>
+    )
+  }
+
+  return (
+    <>
+      <SearchForm onSubmit={setQuery} />
+      <SearchResponse entrySearchResponse={entryResponse}/>
+      {dnsQueryForm()}
     </>
   );
 };

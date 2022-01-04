@@ -4,7 +4,6 @@ import {IncludedIcon} from "./IncludedIcon";
 import {Link} from "react-router-dom";
 import {EntryStatus} from "./EntryStatus";
 import styles from "./SearchResponse.module.css";
-import {queries} from "@testing-library/react";
 
 interface SearchResponseProps {
   entrySearchResponse: EntrySearchResponse | null

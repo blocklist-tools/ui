@@ -1,23 +1,17 @@
 import {FunctionComponent} from "react";
 import {useParams} from "react-router-dom";
-import {Blocklist} from "../Models";
 import {faExclamationCircle, faFileDownload, faGavel, faHome} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {BlocklistVersions} from "./BlocklistVersions";
+import {useBlocklistDetails} from "../hooks/useBlocklistDetails";
 
 export const BlocklistDetails: FunctionComponent = () =>  {
   const { blocklistId } = useParams();
+  const blocklist = useBlocklistDetails(blocklistId as string);
 
-  const blocklist = {
-    "id": blocklistId,
-    "name": "Developer Dan: Facebook asdfasdf asdf asdf asdf",
-    "format": "hosts",
-    "downloadUrl": "https://www.github.developerdan.com/hosts/lists/facebook-extended.txt",
-    "homepageUrl": "https://www.github.developerdan.com/hosts/",
-    "issuesUrl": "https://github.com/lightswitch05/hosts/issues",
-    "licenseUrl": "https://github.com/lightswitch05/hosts/blob/master/LICENSE",
-    "licenseType": "Apache-2.0"
-  } as Blocklist;
+  if (!blocklist) {
+    return null;
+  }
 
   return (
     <section className={"basic-section"}>

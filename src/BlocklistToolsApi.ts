@@ -1,4 +1,4 @@
-import {Blocklist, DnsQueryResponse, EntrySearchResponse, EntrySummary} from "./Models";
+import {Blocklist, DnsQueryResponse, EntrySearchResponse, EntrySummary, Version} from "./Models";
 import ApiError from "./ApiError";
 import {toast} from "react-hot-toast";
 
@@ -21,9 +21,26 @@ export default class BlocklistToolsApi {
     if (response.status !== 200) {
       const error = `Fetch blocklists failed: ${response.status} => ${await response.text()}`;
       console.log(error);
+      toast.error('Error loading blocklists, please wait a minute and try again.');
       throw ApiError.fromMessage(error);
     }
     return await response.json() as Blocklist[];
+  }
+
+  public static async blocklistDetails(blocklistId: string) {
+    const response = await fetch(`${this.rootApiUrl}/blocklists/${blocklistId}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      const error = `Fetch blocklist failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      toast.error('Error loading blocklist details, please wait a minute and try again.');
+      throw ApiError.fromMessage(error);
+    }
+    return await response.json() as Blocklist;
   }
 
   public static async entrySearch(query: string) {
@@ -82,6 +99,29 @@ export default class BlocklistToolsApi {
     }
     const body = await response.json();
     return body as DnsQueryResponse;
+  }
+
+  public static async versions(blocklistId: string, page: number) {
+    const response = await fetch(`${this.rootApiUrl}/blocklists/${blocklistId}/versions?page=${page}`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Fetch versions failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      toast.error('Unable to load list versions.');
+      throw ApiError.fromMessage(error);
+    }
+    let rawVersions = await response.json() as any[];
+    return rawVersions.map(this.parseVersions);
+  }
+
+  private static parseVersions(version: any) {
+    version.createdOn = new Date(version.createdOn);
+    version.lastSeen = new Date(version.lastSeen);
+    return version as Version;
   }
 
 }
