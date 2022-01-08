@@ -67,3 +67,28 @@ export enum DnsQueryTypes {
   SVCB = 'SVCB',
   TXT = 'TXT'
 }
+
+export enum DiffTypes {
+  INTERSECTION = 'intersection',
+  SUBTRACTION = 'subtraction',
+  ADDITION = 'addition'
+}
+
+export interface DiffSection {
+  hasAdditions: boolean
+  hasSubtractions: boolean
+  lines: DiffLine[]
+}
+
+export interface DiffLine {
+  isAddition: boolean
+  isSubtraction: boolean
+  isNeutral: boolean
+  value: string
+}
+
+export interface VersionDiff {
+  firstVersion: string
+  secondVersion: string|null
+  sections: DiffSection[]
+}

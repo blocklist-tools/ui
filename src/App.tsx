@@ -6,6 +6,7 @@ import {PageLayout} from "./components/PageLayout";
 import {About} from "./components/About";
 import {BlocklistDetails} from "./components/BlocklistDetails";
 import {SearchPage} from "./components/SearchPage";
+import {BlocklistDiff} from "./components/BlocklistDiff";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
               <Route path={"/entries/search"} element={<SearchPage />} />
               <Route path={"/blocklists"} element={<Blocklists />} />
               <Route path={"/blocklists/:blocklistId"} element={<BlocklistDetails />} />
-              <Route path={"/versions/:versionId/diff"} element={<BlocklistDetails />} />
+              <Route path={"/versions/:firstVersion/diff"} element={<BlocklistDiff />} />
+              <Route path={"/versions/:firstVersion/diff/:secondVersion"} element={<BlocklistDiff />} />
               <Route path={"/about"} element={<About />} />
               <Route path="*" element={<Navigate replace to="/entries/search" />} />
             </Route>
