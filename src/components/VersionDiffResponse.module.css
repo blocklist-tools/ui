@@ -17,11 +17,11 @@
 }
 
 .addedLine .line,
-.addedLine .line-status {
-  background-color: #006400;
+.addedLine .lineStatus {
+  background-color: var(--diff-line-added);
 }
 
 .removedLine .line,
-.removedLine .line-status {
-  background-color: #8B0000;
+.removedLine .lineStatus {
+  background-color: var(--diff-line-removed);
 }

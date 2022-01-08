@@ -7,6 +7,8 @@
   --nav-background-color: #161b22;
   --link-color: #58a6ff;
   --toast-background: #333;
+  --diff-line-added: #006400;
+  --diff-line-removed: #8B0000
 }
 
 :root.lightTheme {
@@ -16,6 +18,8 @@
   --nav-background-color: #24292f;
   --link-color: #0969da;
   --toast-background: #faebd7;
+  --diff-line-added: #abf2bc;
+  --diff-line-removed: #ffc0c0;
 }
 
 html {
