@@ -1,0 +1,33 @@
+
+.container {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+
+.container button,
+.container input {
+  font-size: 1rem;
+}
+
+
+.container input {
+  height: 2.25rem;
+  flex-grow: 2;
+  border: solid 0.1rem #0d1117;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.container button {
+  padding: 0 8px 0 8px;
+  border-top: solid 0.1rem transparent;
+  border-bottom: solid 0.1rem transparent;
+  background-color: #d9d9d9;
+  color: #000;
+}
+
+.container button:hover,
+.container button:focus {
+  background-color: #9CD7F7;
+}

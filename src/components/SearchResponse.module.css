@@ -1,0 +1,9 @@
+
+.listEntry {
+  padding-bottom: 8px;
+}
+
+.listName {
+  color: var(--color);
+  font-weight: bold;
+}

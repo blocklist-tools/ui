@@ -2,36 +2,10 @@ version: '3.4'
 
 services:
   npm:
-    image: node:14-buster
+    image: node:17-bullseye
     volumes:
       - "${PWD}/:/opt/ui"
     working_dir: /opt/ui
     entrypoint: "npm"
     ports:
-      - 3000:3000
-
-  build:
-    image: node:14-buster
-    volumes:
-      - "${PWD}/:/opt/ui"
-    working_dir: /opt/ui
-    entrypoint: "npm"
-    command: "run-script build"
-
-  deploy:
-    image: node:14-buster
-    volumes:
-      - "${PWD}/:/opt/ui"
-    working_dir: /opt/ui
-    entrypoint: "npm"
-    command: "run-script deploy"
-
-  dev:
-    image: node:14-buster
-    volumes:
-      - "${PWD}/:/opt/ui"
-    working_dir: /opt/ui
-    entrypoint: "npm"
-    command: ["run", "start"]
-    ports:
-      - 3000:3000
+      - "3000:3000"

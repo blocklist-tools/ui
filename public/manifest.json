@@ -3,13 +3,12 @@
   "name": "Blocklist Tools",
   "icons": [
     {
-      "src": "lightswitch05.png",
-      "sizes": "64x64 32x32 24x24 16x16 300x300",
-      "type": "image/x-icon"
+      "src": "/lightswitch05.svg",
+      "sizes": "any"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#212121"
+  "background_color": "#2b2a33"
 }

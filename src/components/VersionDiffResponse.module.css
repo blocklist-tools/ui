@@ -1,0 +1,27 @@
+
+.lineBreak {
+  background-color: #212121;
+  color: #FFF;
+  text-align: center;
+}
+
+.lineStatus {
+  display: inline-block;
+  padding: 2px;
+  margin-right: 20px;
+  width: 10px;
+}
+
+.line {
+  padding: 2px 4px 2px 4px;
+}
+
+.addedLine .line,
+.addedLine .lineStatus {
+  background-color: var(--diff-line-added);
+}
+
+.removedLine .line,
+.removedLine .lineStatus {
+  background-color: var(--diff-line-removed);
+}
