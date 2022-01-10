@@ -3,9 +3,8 @@
   "name": "Blocklist Tools",
   "icons": [
     {
-      "src": "/lightswitch05.png",
-      "type": "image/png",
-      "sizes": "300x300"
+      "src": "/lightswitch05.svg",
+      "sizes": "any"
     }
   ],
   "start_url": ".",
