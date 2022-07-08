@@ -92,3 +92,11 @@ export interface VersionDiff {
   secondVersion: string|null
   sections: DiffSection[]
 }
+
+export interface DataStats {
+  size: string
+  entries: number
+  versions: number
+  blocklists: number
+  domains: number
+}
