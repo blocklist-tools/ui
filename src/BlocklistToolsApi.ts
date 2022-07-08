@@ -1,4 +1,12 @@
-import {Blocklist, DiffSection, DnsQueryResponse, EntrySearchResponse, EntrySummary, Version} from "./Models";
+import {
+  Blocklist,
+  DataStats,
+  DiffSection,
+  DnsQueryResponse,
+  EntrySearchResponse,
+  EntrySummary,
+  Version
+} from "./Models";
 import ApiError from "./ApiError";
 import {toast} from "react-hot-toast";
 
@@ -116,6 +124,23 @@ export default class BlocklistToolsApi {
     }
     let rawVersions = await response.json() as any[];
     return rawVersions.map(this.parseVersions);
+  }
+
+  public static async dataStats() {
+    const response = await fetch(`${this.rootApiUrl}/stats`, {
+      headers: this.defaultHeaders(),
+      mode: 'cors',
+      method: 'GET'
+    });
+
+    if (response.status !== 200) {
+      let error = `Fetch stats failed: ${response.status} => ${await response.text()}`;
+      console.log(error);
+      toast.error('Unable to load stats.');
+      throw ApiError.fromMessage(error);
+    }
+    const body = await response.json();
+    return body as DataStats;
   }
 
   private static parseVersions(version: any) {
